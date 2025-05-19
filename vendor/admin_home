@@ -1,0 +1,32 @@
+<?php
+session_start();
+
+// Debugging session values (optional)
+echo 'Username: ' . $_SESSION['username'] . '<br>';
+echo 'Role: ' . $_SESSION['role'] . '<br>';
+
+// Comment out or remove the exit() when done debugging
+// exit();
+
+// Ensure only admins can access
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../login.php");
+    //exit();
+}
+
+include '../config.php';
+include '../includes/admin_header.php';
+include '../includes/admin_sidebar.php';
+?>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="container">
+        <div class="card p-4 mt-4">
+            <h3 class="mb-3">Welcome to the Admin Dashboard</h3>
+            <p>Use the sidebar to manage quizzes, users, and system settings.</p>
+        </div>
+    </div>
+</div>
+
+<?php include '../includes/admin_footer.php'; ?>
